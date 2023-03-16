@@ -16,14 +16,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (cxt)=> HomeCubit())
-      ],
+      providers: [BlocProvider(create: (cxt) => HomeCubit())],
       child: MaterialApp(
-      home: Home(),
+        theme: ThemeData.fallback(),
+        home: const Home(),
       ),
     );
   }
 }
-
-

@@ -750,6 +750,8 @@ abstract class $HomeStateStatePayloadCopyWith<$Res> {
       _$HomeStateStatePayloadCopyWithImpl<$Res, HomeStateStatePayload>;
   @useResult
   $Res call({String error, CurrentWeatherModel? currentWeatherModel});
+
+  $CurrentWeatherModelCopyWith<$Res>? get currentWeatherModel;
 }
 
 /// @nodoc
@@ -780,6 +782,19 @@ class _$HomeStateStatePayloadCopyWithImpl<$Res,
               as CurrentWeatherModel?,
     ) as $Val);
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CurrentWeatherModelCopyWith<$Res>? get currentWeatherModel {
+    if (_value.currentWeatherModel == null) {
+      return null;
+    }
+
+    return $CurrentWeatherModelCopyWith<$Res>(_value.currentWeatherModel!,
+        (value) {
+      return _then(_value.copyWith(currentWeatherModel: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -791,6 +806,9 @@ abstract class _$$_HomeStateStatePayloadCopyWith<$Res>
   @override
   @useResult
   $Res call({String error, CurrentWeatherModel? currentWeatherModel});
+
+  @override
+  $CurrentWeatherModelCopyWith<$Res>? get currentWeatherModel;
 }
 
 /// @nodoc
@@ -842,13 +860,12 @@ class _$_HomeStateStatePayload implements _HomeStateStatePayload {
         (other.runtimeType == runtimeType &&
             other is _$_HomeStateStatePayload &&
             (identical(other.error, error) || other.error == error) &&
-            const DeepCollectionEquality()
-                .equals(other.currentWeatherModel, currentWeatherModel));
+            (identical(other.currentWeatherModel, currentWeatherModel) ||
+                other.currentWeatherModel == currentWeatherModel));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, error,
-      const DeepCollectionEquality().hash(currentWeatherModel));
+  int get hashCode => Object.hash(runtimeType, error, currentWeatherModel);
 
   @JsonKey(ignore: true)
   @override

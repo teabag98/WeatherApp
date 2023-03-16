@@ -20,9 +20,12 @@ CurrentWeatherModel _$CurrentWeatherModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$CurrentWeatherModel {
+  @JsonKey(name: 'coord')
   CoordModel? get coord => throw _privateConstructorUsedError;
+  @JsonKey(name: 'weather')
   List<WeatherParamModel> get weather => throw _privateConstructorUsedError;
-  MainParamModel? get main => throw _privateConstructorUsedError;
+  @JsonKey(name: 'main')
+  MainParamModel get main => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,12 +40,12 @@ abstract class $CurrentWeatherModelCopyWith<$Res> {
       _$CurrentWeatherModelCopyWithImpl<$Res, CurrentWeatherModel>;
   @useResult
   $Res call(
-      {CoordModel? coord,
-      List<WeatherParamModel> weather,
-      MainParamModel? main});
+      {@JsonKey(name: 'coord') CoordModel? coord,
+      @JsonKey(name: 'weather') List<WeatherParamModel> weather,
+      @JsonKey(name: 'main') MainParamModel main});
 
   $CoordModelCopyWith<$Res>? get coord;
-  $MainParamModelCopyWith<$Res>? get main;
+  $MainParamModelCopyWith<$Res> get main;
 }
 
 /// @nodoc
@@ -60,7 +63,7 @@ class _$CurrentWeatherModelCopyWithImpl<$Res, $Val extends CurrentWeatherModel>
   $Res call({
     Object? coord = freezed,
     Object? weather = null,
-    Object? main = freezed,
+    Object? main = null,
   }) {
     return _then(_value.copyWith(
       coord: freezed == coord
@@ -71,10 +74,10 @@ class _$CurrentWeatherModelCopyWithImpl<$Res, $Val extends CurrentWeatherModel>
           ? _value.weather
           : weather // ignore: cast_nullable_to_non_nullable
               as List<WeatherParamModel>,
-      main: freezed == main
+      main: null == main
           ? _value.main
           : main // ignore: cast_nullable_to_non_nullable
-              as MainParamModel?,
+              as MainParamModel,
     ) as $Val);
   }
 
@@ -92,12 +95,8 @@ class _$CurrentWeatherModelCopyWithImpl<$Res, $Val extends CurrentWeatherModel>
 
   @override
   @pragma('vm:prefer-inline')
-  $MainParamModelCopyWith<$Res>? get main {
-    if (_value.main == null) {
-      return null;
-    }
-
-    return $MainParamModelCopyWith<$Res>(_value.main!, (value) {
+  $MainParamModelCopyWith<$Res> get main {
+    return $MainParamModelCopyWith<$Res>(_value.main, (value) {
       return _then(_value.copyWith(main: value) as $Val);
     });
   }
@@ -112,14 +111,14 @@ abstract class _$$_CurrentWeatherModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {CoordModel? coord,
-      List<WeatherParamModel> weather,
-      MainParamModel? main});
+      {@JsonKey(name: 'coord') CoordModel? coord,
+      @JsonKey(name: 'weather') List<WeatherParamModel> weather,
+      @JsonKey(name: 'main') MainParamModel main});
 
   @override
   $CoordModelCopyWith<$Res>? get coord;
   @override
-  $MainParamModelCopyWith<$Res>? get main;
+  $MainParamModelCopyWith<$Res> get main;
 }
 
 /// @nodoc
@@ -135,7 +134,7 @@ class __$$_CurrentWeatherModelCopyWithImpl<$Res>
   $Res call({
     Object? coord = freezed,
     Object? weather = null,
-    Object? main = freezed,
+    Object? main = null,
   }) {
     return _then(_$_CurrentWeatherModel(
       coord: freezed == coord
@@ -146,10 +145,10 @@ class __$$_CurrentWeatherModelCopyWithImpl<$Res>
           ? _value._weather
           : weather // ignore: cast_nullable_to_non_nullable
               as List<WeatherParamModel>,
-      main: freezed == main
+      main: null == main
           ? _value.main
           : main // ignore: cast_nullable_to_non_nullable
-              as MainParamModel?,
+              as MainParamModel,
     ));
   }
 }
@@ -158,18 +157,20 @@ class __$$_CurrentWeatherModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_CurrentWeatherModel implements _CurrentWeatherModel {
   const _$_CurrentWeatherModel(
-      {required this.coord,
-      required final List<WeatherParamModel> weather,
-      required this.main})
+      {@JsonKey(name: 'coord') this.coord,
+      @JsonKey(name: 'weather') required final List<WeatherParamModel> weather,
+      @JsonKey(name: 'main') required this.main})
       : _weather = weather;
 
   factory _$_CurrentWeatherModel.fromJson(Map<String, dynamic> json) =>
       _$$_CurrentWeatherModelFromJson(json);
 
   @override
+  @JsonKey(name: 'coord')
   final CoordModel? coord;
   final List<WeatherParamModel> _weather;
   @override
+  @JsonKey(name: 'weather')
   List<WeatherParamModel> get weather {
     if (_weather is EqualUnmodifiableListView) return _weather;
     // ignore: implicit_dynamic_type
@@ -177,7 +178,8 @@ class _$_CurrentWeatherModel implements _CurrentWeatherModel {
   }
 
   @override
-  final MainParamModel? main;
+  @JsonKey(name: 'main')
+  final MainParamModel main;
 
   @override
   String toString() {
@@ -216,19 +218,25 @@ class _$_CurrentWeatherModel implements _CurrentWeatherModel {
 
 abstract class _CurrentWeatherModel implements CurrentWeatherModel {
   const factory _CurrentWeatherModel(
-      {required final CoordModel? coord,
-      required final List<WeatherParamModel> weather,
-      required final MainParamModel? main}) = _$_CurrentWeatherModel;
+      {@JsonKey(name: 'coord')
+          final CoordModel? coord,
+      @JsonKey(name: 'weather')
+          required final List<WeatherParamModel> weather,
+      @JsonKey(name: 'main')
+          required final MainParamModel main}) = _$_CurrentWeatherModel;
 
   factory _CurrentWeatherModel.fromJson(Map<String, dynamic> json) =
       _$_CurrentWeatherModel.fromJson;
 
   @override
+  @JsonKey(name: 'coord')
   CoordModel? get coord;
   @override
+  @JsonKey(name: 'weather')
   List<WeatherParamModel> get weather;
   @override
-  MainParamModel? get main;
+  @JsonKey(name: 'main')
+  MainParamModel get main;
   @override
   @JsonKey(ignore: true)
   _$$_CurrentWeatherModelCopyWith<_$_CurrentWeatherModel> get copyWith =>
@@ -241,8 +249,10 @@ CoordModel _$CoordModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$CoordModel {
+  @JsonKey(name: 'lat')
   double? get lat => throw _privateConstructorUsedError;
-  double? get lon => throw _privateConstructorUsedError;
+  @JsonKey(name: 'lon')
+  double? get long => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -256,7 +266,8 @@ abstract class $CoordModelCopyWith<$Res> {
           CoordModel value, $Res Function(CoordModel) then) =
       _$CoordModelCopyWithImpl<$Res, CoordModel>;
   @useResult
-  $Res call({double? lat, double? lon});
+  $Res call(
+      {@JsonKey(name: 'lat') double? lat, @JsonKey(name: 'lon') double? long});
 }
 
 /// @nodoc
@@ -273,16 +284,16 @@ class _$CoordModelCopyWithImpl<$Res, $Val extends CoordModel>
   @override
   $Res call({
     Object? lat = freezed,
-    Object? lon = freezed,
+    Object? long = freezed,
   }) {
     return _then(_value.copyWith(
       lat: freezed == lat
           ? _value.lat
           : lat // ignore: cast_nullable_to_non_nullable
               as double?,
-      lon: freezed == lon
-          ? _value.lon
-          : lon // ignore: cast_nullable_to_non_nullable
+      long: freezed == long
+          ? _value.long
+          : long // ignore: cast_nullable_to_non_nullable
               as double?,
     ) as $Val);
   }
@@ -296,7 +307,8 @@ abstract class _$$_CoordModelCopyWith<$Res>
       __$$_CoordModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({double? lat, double? lon});
+  $Res call(
+      {@JsonKey(name: 'lat') double? lat, @JsonKey(name: 'lon') double? long});
 }
 
 /// @nodoc
@@ -311,16 +323,16 @@ class __$$_CoordModelCopyWithImpl<$Res>
   @override
   $Res call({
     Object? lat = freezed,
-    Object? lon = freezed,
+    Object? long = freezed,
   }) {
     return _then(_$_CoordModel(
       lat: freezed == lat
           ? _value.lat
           : lat // ignore: cast_nullable_to_non_nullable
               as double?,
-      lon: freezed == lon
-          ? _value.lon
-          : lon // ignore: cast_nullable_to_non_nullable
+      long: freezed == long
+          ? _value.long
+          : long // ignore: cast_nullable_to_non_nullable
               as double?,
     ));
   }
@@ -329,19 +341,22 @@ class __$$_CoordModelCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_CoordModel implements _CoordModel {
-  const _$_CoordModel({required this.lat, required this.lon});
+  const _$_CoordModel(
+      {@JsonKey(name: 'lat') this.lat, @JsonKey(name: 'lon') this.long});
 
   factory _$_CoordModel.fromJson(Map<String, dynamic> json) =>
       _$$_CoordModelFromJson(json);
 
   @override
+  @JsonKey(name: 'lat')
   final double? lat;
   @override
-  final double? lon;
+  @JsonKey(name: 'lon')
+  final double? long;
 
   @override
   String toString() {
-    return 'CoordModel(lat: $lat, lon: $lon)';
+    return 'CoordModel(lat: $lat, long: $long)';
   }
 
   @override
@@ -350,12 +365,12 @@ class _$_CoordModel implements _CoordModel {
         (other.runtimeType == runtimeType &&
             other is _$_CoordModel &&
             (identical(other.lat, lat) || other.lat == lat) &&
-            (identical(other.lon, lon) || other.lon == lon));
+            (identical(other.long, long) || other.long == long));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, lat, lon);
+  int get hashCode => Object.hash(runtimeType, lat, long);
 
   @JsonKey(ignore: true)
   @override
@@ -373,15 +388,18 @@ class _$_CoordModel implements _CoordModel {
 
 abstract class _CoordModel implements CoordModel {
   const factory _CoordModel(
-      {required final double? lat, required final double? lon}) = _$_CoordModel;
+      {@JsonKey(name: 'lat') final double? lat,
+      @JsonKey(name: 'lon') final double? long}) = _$_CoordModel;
 
   factory _CoordModel.fromJson(Map<String, dynamic> json) =
       _$_CoordModel.fromJson;
 
   @override
+  @JsonKey(name: 'lat')
   double? get lat;
   @override
-  double? get lon;
+  @JsonKey(name: 'lon')
+  double? get long;
   @override
   @JsonKey(ignore: true)
   _$$_CoordModelCopyWith<_$_CoordModel> get copyWith =>
@@ -394,8 +412,11 @@ WeatherParamModel _$WeatherParamModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$WeatherParamModel {
+  @JsonKey(name: 'id')
   int? get id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'main')
   String? get main => throw _privateConstructorUsedError;
+  @JsonKey(name: 'description')
   String? get description => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -410,7 +431,10 @@ abstract class $WeatherParamModelCopyWith<$Res> {
           WeatherParamModel value, $Res Function(WeatherParamModel) then) =
       _$WeatherParamModelCopyWithImpl<$Res, WeatherParamModel>;
   @useResult
-  $Res call({int? id, String? main, String? description});
+  $Res call(
+      {@JsonKey(name: 'id') int? id,
+      @JsonKey(name: 'main') String? main,
+      @JsonKey(name: 'description') String? description});
 }
 
 /// @nodoc
@@ -455,7 +479,10 @@ abstract class _$$_WeatherParamModelCopyWith<$Res>
       __$$_WeatherParamModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int? id, String? main, String? description});
+  $Res call(
+      {@JsonKey(name: 'id') int? id,
+      @JsonKey(name: 'main') String? main,
+      @JsonKey(name: 'description') String? description});
 }
 
 /// @nodoc
@@ -494,16 +521,21 @@ class __$$_WeatherParamModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_WeatherParamModel implements _WeatherParamModel {
   const _$_WeatherParamModel(
-      {required this.id, required this.main, required this.description});
+      {@JsonKey(name: 'id') this.id,
+      @JsonKey(name: 'main') this.main,
+      @JsonKey(name: 'description') this.description});
 
   factory _$_WeatherParamModel.fromJson(Map<String, dynamic> json) =>
       _$$_WeatherParamModelFromJson(json);
 
   @override
+  @JsonKey(name: 'id')
   final int? id;
   @override
+  @JsonKey(name: 'main')
   final String? main;
   @override
+  @JsonKey(name: 'description')
   final String? description;
 
   @override
@@ -543,18 +575,22 @@ class _$_WeatherParamModel implements _WeatherParamModel {
 
 abstract class _WeatherParamModel implements WeatherParamModel {
   const factory _WeatherParamModel(
-      {required final int? id,
-      required final String? main,
-      required final String? description}) = _$_WeatherParamModel;
+          {@JsonKey(name: 'id') final int? id,
+          @JsonKey(name: 'main') final String? main,
+          @JsonKey(name: 'description') final String? description}) =
+      _$_WeatherParamModel;
 
   factory _WeatherParamModel.fromJson(Map<String, dynamic> json) =
       _$_WeatherParamModel.fromJson;
 
   @override
+  @JsonKey(name: 'id')
   int? get id;
   @override
+  @JsonKey(name: 'main')
   String? get main;
   @override
+  @JsonKey(name: 'description')
   String? get description;
   @override
   @JsonKey(ignore: true)
@@ -568,9 +604,13 @@ MainParamModel _$MainParamModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$MainParamModel {
+  @JsonKey(name: 'temp')
   double? get temp => throw _privateConstructorUsedError;
-  double? get temp_min => throw _privateConstructorUsedError;
-  double? get temp_max => throw _privateConstructorUsedError;
+  @JsonKey(name: 'temp_min')
+  double? get minimumTemp => throw _privateConstructorUsedError;
+  @JsonKey(name: 'temp_max')
+  double? get maximumTemp => throw _privateConstructorUsedError;
+  @JsonKey(name: 'humidity')
   double? get humidity => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -586,7 +626,10 @@ abstract class $MainParamModelCopyWith<$Res> {
       _$MainParamModelCopyWithImpl<$Res, MainParamModel>;
   @useResult
   $Res call(
-      {double? temp, double? temp_min, double? temp_max, double? humidity});
+      {@JsonKey(name: 'temp') double? temp,
+      @JsonKey(name: 'temp_min') double? minimumTemp,
+      @JsonKey(name: 'temp_max') double? maximumTemp,
+      @JsonKey(name: 'humidity') double? humidity});
 }
 
 /// @nodoc
@@ -603,8 +646,8 @@ class _$MainParamModelCopyWithImpl<$Res, $Val extends MainParamModel>
   @override
   $Res call({
     Object? temp = freezed,
-    Object? temp_min = freezed,
-    Object? temp_max = freezed,
+    Object? minimumTemp = freezed,
+    Object? maximumTemp = freezed,
     Object? humidity = freezed,
   }) {
     return _then(_value.copyWith(
@@ -612,13 +655,13 @@ class _$MainParamModelCopyWithImpl<$Res, $Val extends MainParamModel>
           ? _value.temp
           : temp // ignore: cast_nullable_to_non_nullable
               as double?,
-      temp_min: freezed == temp_min
-          ? _value.temp_min
-          : temp_min // ignore: cast_nullable_to_non_nullable
+      minimumTemp: freezed == minimumTemp
+          ? _value.minimumTemp
+          : minimumTemp // ignore: cast_nullable_to_non_nullable
               as double?,
-      temp_max: freezed == temp_max
-          ? _value.temp_max
-          : temp_max // ignore: cast_nullable_to_non_nullable
+      maximumTemp: freezed == maximumTemp
+          ? _value.maximumTemp
+          : maximumTemp // ignore: cast_nullable_to_non_nullable
               as double?,
       humidity: freezed == humidity
           ? _value.humidity
@@ -637,7 +680,10 @@ abstract class _$$_MainParamModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {double? temp, double? temp_min, double? temp_max, double? humidity});
+      {@JsonKey(name: 'temp') double? temp,
+      @JsonKey(name: 'temp_min') double? minimumTemp,
+      @JsonKey(name: 'temp_max') double? maximumTemp,
+      @JsonKey(name: 'humidity') double? humidity});
 }
 
 /// @nodoc
@@ -652,8 +698,8 @@ class __$$_MainParamModelCopyWithImpl<$Res>
   @override
   $Res call({
     Object? temp = freezed,
-    Object? temp_min = freezed,
-    Object? temp_max = freezed,
+    Object? minimumTemp = freezed,
+    Object? maximumTemp = freezed,
     Object? humidity = freezed,
   }) {
     return _then(_$_MainParamModel(
@@ -661,13 +707,13 @@ class __$$_MainParamModelCopyWithImpl<$Res>
           ? _value.temp
           : temp // ignore: cast_nullable_to_non_nullable
               as double?,
-      temp_min: freezed == temp_min
-          ? _value.temp_min
-          : temp_min // ignore: cast_nullable_to_non_nullable
+      minimumTemp: freezed == minimumTemp
+          ? _value.minimumTemp
+          : minimumTemp // ignore: cast_nullable_to_non_nullable
               as double?,
-      temp_max: freezed == temp_max
-          ? _value.temp_max
-          : temp_max // ignore: cast_nullable_to_non_nullable
+      maximumTemp: freezed == maximumTemp
+          ? _value.maximumTemp
+          : maximumTemp // ignore: cast_nullable_to_non_nullable
               as double?,
       humidity: freezed == humidity
           ? _value.humidity
@@ -681,26 +727,30 @@ class __$$_MainParamModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_MainParamModel implements _MainParamModel {
   const _$_MainParamModel(
-      {required this.temp,
-      required this.temp_min,
-      required this.temp_max,
-      required this.humidity});
+      {@JsonKey(name: 'temp') this.temp,
+      @JsonKey(name: 'temp_min') this.minimumTemp,
+      @JsonKey(name: 'temp_max') this.maximumTemp,
+      @JsonKey(name: 'humidity') this.humidity});
 
   factory _$_MainParamModel.fromJson(Map<String, dynamic> json) =>
       _$$_MainParamModelFromJson(json);
 
   @override
+  @JsonKey(name: 'temp')
   final double? temp;
   @override
-  final double? temp_min;
+  @JsonKey(name: 'temp_min')
+  final double? minimumTemp;
   @override
-  final double? temp_max;
+  @JsonKey(name: 'temp_max')
+  final double? maximumTemp;
   @override
+  @JsonKey(name: 'humidity')
   final double? humidity;
 
   @override
   String toString() {
-    return 'MainParamModel(temp: $temp, temp_min: $temp_min, temp_max: $temp_max, humidity: $humidity)';
+    return 'MainParamModel(temp: $temp, minimumTemp: $minimumTemp, maximumTemp: $maximumTemp, humidity: $humidity)';
   }
 
   @override
@@ -709,10 +759,10 @@ class _$_MainParamModel implements _MainParamModel {
         (other.runtimeType == runtimeType &&
             other is _$_MainParamModel &&
             (identical(other.temp, temp) || other.temp == temp) &&
-            (identical(other.temp_min, temp_min) ||
-                other.temp_min == temp_min) &&
-            (identical(other.temp_max, temp_max) ||
-                other.temp_max == temp_max) &&
+            (identical(other.minimumTemp, minimumTemp) ||
+                other.minimumTemp == minimumTemp) &&
+            (identical(other.maximumTemp, maximumTemp) ||
+                other.maximumTemp == maximumTemp) &&
             (identical(other.humidity, humidity) ||
                 other.humidity == humidity));
   }
@@ -720,7 +770,7 @@ class _$_MainParamModel implements _MainParamModel {
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, temp, temp_min, temp_max, humidity);
+      Object.hash(runtimeType, temp, minimumTemp, maximumTemp, humidity);
 
   @JsonKey(ignore: true)
   @override
@@ -738,21 +788,25 @@ class _$_MainParamModel implements _MainParamModel {
 
 abstract class _MainParamModel implements MainParamModel {
   const factory _MainParamModel(
-      {required final double? temp,
-      required final double? temp_min,
-      required final double? temp_max,
-      required final double? humidity}) = _$_MainParamModel;
+      {@JsonKey(name: 'temp') final double? temp,
+      @JsonKey(name: 'temp_min') final double? minimumTemp,
+      @JsonKey(name: 'temp_max') final double? maximumTemp,
+      @JsonKey(name: 'humidity') final double? humidity}) = _$_MainParamModel;
 
   factory _MainParamModel.fromJson(Map<String, dynamic> json) =
       _$_MainParamModel.fromJson;
 
   @override
+  @JsonKey(name: 'temp')
   double? get temp;
   @override
-  double? get temp_min;
+  @JsonKey(name: 'temp_min')
+  double? get minimumTemp;
   @override
-  double? get temp_max;
+  @JsonKey(name: 'temp_max')
+  double? get maximumTemp;
   @override
+  @JsonKey(name: 'humidity')
   double? get humidity;
   @override
   @JsonKey(ignore: true)

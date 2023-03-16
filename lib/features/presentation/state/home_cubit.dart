@@ -13,10 +13,10 @@ class HomeCubit extends Cubit<HomeState> {
   Future<void> fetchCurrentWeather(
       {double? lat, double? long, String? key}) async {
     emit(HomeState.loading(payload: state.payload!.copyWith()));
-    final _res = await getIt.get<CurrentRepository>().getCurrentWeather();
-    if (_res != null) {
+    final res = await getIt.get<CurrentRepository>().getCurrentWeather();
+    if (res.weather.isNotEmpty) {
       emit(HomeState.loaded(
-          payload: state.payload!.copyWith(currentWeatherModel: _res)));
+          payload: state.payload!.copyWith(currentWeatherModel: res)));
     }
     emit(HomeState.error(
         payload: state.payload!.copyWith(error: "error occured")));

@@ -1,47 +1,54 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'currentmodel.g.dart';
 part 'currentmodel.freezed.dart';
 
 @freezed
-class CurrentWeatherModel with _$CurrentWeatherModel {
+abstract class CurrentWeatherModel with _$CurrentWeatherModel {
   const factory CurrentWeatherModel(
-      {required CoordModel? coord,
-      required List<WeatherParamModel> weather,
-      required MainParamModel? main}) = _CurrentWeatherModel;
+          {@JsonKey(name: 'coord') CoordModel? coord,
+          @JsonKey(name: 'weather') required List<WeatherParamModel> weather,
+          @JsonKey(name: 'main') required MainParamModel main}) =
+      _CurrentWeatherModel;
 
   factory CurrentWeatherModel.fromJson(Map<String, dynamic> json) =>
-      _$CurrentWeatherModelFromJson(json);
+      _$CurrentWeatherModelFromJson(
+          Map.castFrom<dynamic, dynamic, String, dynamic>(json));
 }
 
 @freezed
-class CoordModel with _$CoordModel {
-  const factory CoordModel({required double? lat, required double? lon}) =
-      _CoordModel;
+abstract class CoordModel with _$CoordModel {
+  const factory CoordModel(
+      {@JsonKey(name: 'lat') double? lat,
+      @JsonKey(name: 'lon') double? long}) = _CoordModel;
 
   factory CoordModel.fromJson(Map<String, dynamic> json) =>
-      _$CoordModelFromJson(json);
+      _$CoordModelFromJson(
+          Map.castFrom<dynamic, dynamic, String, dynamic>(json));
 }
 
 @freezed
-class WeatherParamModel with _$CoordModel {
+abstract class WeatherParamModel with _$WeatherParamModel {
   const factory WeatherParamModel({
-    required int? id,
-    required String? main,
-    required String? description,
+    @JsonKey(name: 'id') int? id,
+    @JsonKey(name: 'main') String? main,
+    @JsonKey(name: 'description') String? description,
   }) = _WeatherParamModel;
 
   factory WeatherParamModel.fromJson(Map<String, dynamic> json) =>
-      _$WeatherParamModelFromJson(json);
+      _$WeatherParamModelFromJson(
+          Map.castFrom<dynamic, dynamic, String, dynamic>(json));
 }
 
 @freezed
-class MainParamModel with _$CoordModel {
+abstract class MainParamModel with _$MainParamModel {
   const factory MainParamModel(
-      {required double? temp,
-      required double? temp_min,
-      required double? temp_max,
-      required double? humidity}) = _MainParamModel;
+      {@JsonKey(name: 'temp') double? temp,
+      @JsonKey(name: 'temp_min') double? minimumTemp,
+      @JsonKey(name: 'temp_max') double? maximumTemp,
+      @JsonKey(name: 'humidity') double? humidity}) = _MainParamModel;
 
   factory MainParamModel.fromJson(Map<String, dynamic> json) =>
-      _$MainParamModelFromJson(json);
+      _$MainParamModelFromJson(
+          Map.castFrom<dynamic, dynamic, String, dynamic>(json));
 }
