@@ -7,21 +7,21 @@ import 'package:weatherapp/features/data/models/currentmodel.dart';
 
 abstract class CurrentRepository {
   Future<CurrentWeatherModel> getCurrentWeather(
-      {double? lat, double? long, String? key});
+      {double? lat, double? long, required String key});
 }
 
 class CurrentRepositoryImpl implements CurrentRepository {
   @override
   Future<CurrentWeatherModel> getCurrentWeather(
-      {double? lat, double? long, String? key}) async {
+      {double? lat, double? long, required String key}) async {
     final res = await dio.get(kWeatherCurrent,
         queryParameters: {"lat": lat, "lon": long, "appid": key});
 
     //response to json
-    final json = jsonDecode(res.data);
+    // final json = jsonDecode(res.data);
 
-    logger.d(json);
+    logger.d(res.data);
 
-    return CurrentWeatherModel.fromJson(json);
+    return CurrentWeatherModel.fromJson(res.data);
   }
 }
