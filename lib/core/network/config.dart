@@ -3,3 +3,4 @@ const String kWeatherCurrent =
 
 const String kWeatherForecast =
     "http://api.openweathermap.org/data/2.5/forecast";
+const String kWeatherKey = '90ba23a819a1762fe639dafb5d43a25e';

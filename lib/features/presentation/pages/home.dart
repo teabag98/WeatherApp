@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:location/location.dart';
+import 'package:weatherapp/core/network/config.dart';
 import 'package:weatherapp/core/platform/app_colors.dart';
 import 'package:weatherapp/core/platform/logger.dart';
 import 'package:weatherapp/core/platform/sizer.dart';
+import 'package:weatherapp/features/presentation/state/forecast_cubit.dart';
 import 'package:weatherapp/features/presentation/state/home_cubit.dart';
 
 class Home extends StatefulWidget {
@@ -18,17 +21,23 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    getWeather();
-    // getLocAndWeather();
-    //get weather depending on loc
+
+    getLocation();
   }
 
   // get weather
   getWeather() async {
     await context.read<HomeCubit>().fetchCurrentWeather(
-        lat: /* _locationData!.latitude*/ -1.286389,
-        long: /* _locationData!.longitude*/ 36.817223,
-        key: "90ba23a819a1762fe639dafb5d43a25e");
+        lat: _locationData!.latitude /* -1.286389*/,
+        long: _locationData!.longitude /*36.817223*/,
+        key: kWeatherKey);
+  }
+
+  getForecast() async {
+    await context.read<ForecastCubit>().fetchForecastWeather(
+        lat: _locationData!.latitude /*-1.286389*/,
+        long: _locationData!.longitude /* 36.817223*/,
+        key: kWeatherKey);
   }
 
   //get location then fetch results
@@ -55,6 +64,11 @@ class _HomeState extends State<Home> {
     }
 
     _locationData = await location.getLocation();
+
+    logger.d(_locationData!.longitude);
+
+    getForecast();
+    getWeather();
   }
 
 //change bg according to image
@@ -67,9 +81,18 @@ class _HomeState extends State<Home> {
     return "assets/images/forest_rainy.png";
   }
 
+  //change bg according to image
+  String changeIcon({String? weather}) {
+    if (weather == "Clouds") {
+      return "assets/Icons/partlysunny.png";
+    } else if (weather == "Clear") {
+      return "assets/Icons/clear.png";
+    }
+    return "assets/Icons/rain.png";
+  }
+
   @override
   Widget build(BuildContext context) {
-    logger.d(context.read<HomeCubit>().state.payload);
     return Scaffold(
       body: Column(
         children: [
@@ -176,31 +199,58 @@ class _HomeState extends State<Home> {
             ),
           ),
           const Divider(
+            height: 0.1,
             color: Colors.white,
           ),
-          // BlocBuilder<HomeCubit, HomeState>(
-          //   builder: (context, state) => state.maybeWhen(
-          //     orElse: (() => Container()),
-          //     error: ((payload) => Container(
-          //           child: Center(
-          //             child: Text("${payload!.error}"),
-          //           ),
-          //         )),
-          //     loading: (payload) => Container(
-          //       child: const Center(child: CircularProgressIndicator()),
-          //     ),
-          //     loaded: (payload) => Container(
-          //       width: sizer(context).width,
-          //       height: sizer(context).height * 0.5,
-          //       color: AppColors.sunny,
-          //       child: ListView.builder(
-          //           itemCount: payload!.currentWeatherModel!.weather.length,
-          //           itemBuilder: ((context, index) => const ListTile(
-          //                 title: Text("gd"),
-          //               ))),
-          //     ),
-          //   ),
-          // ),
+          BlocBuilder<ForecastCubit, ForecastState>(
+            builder: (context, state) => state.maybeWhen(
+              orElse: (() => Container()),
+              error: ((payload) => Container(
+                    child: Center(
+                      child: Text("${payload!.error}"),
+                    ),
+                  )),
+              loading: (payload) => Container(
+                child: const Center(child: CircularProgressIndicator()),
+              ),
+              loaded: (payload) => Container(
+                width: sizer(context).width,
+                height: sizer(context).height * 0.45,
+                color: AppColors.sunny,
+                child: ListView.builder(
+                    itemCount: payload!.forecastModel!.forecastData!.length,
+                    itemBuilder: ((context, index) => ListTile(
+                          leading: Text(
+                              "${payload.forecastModel!.forecastData![index].datePredicted}, ${DateFormat("EEEE").format(DateTime.parse(payload.forecastModel!.forecastData![index].datePredicted!))}",
+                              style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.bold)),
+                          title: CircleAvatar(
+                            backgroundColor: Colors.green,
+                            radius: 15,
+                            child: Image.asset(
+                              changeIcon(
+                                  weather: payload
+                                      .forecastModel!
+                                      .forecastData![index]
+                                      .weatherData![0]
+                                      .weatherType),
+                              width: 50,
+                              height: 50,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+
+                          trailing: Text(
+                              "${(((payload.forecastModel!.forecastData![index].forecastDetails!.temperature)! % 273.15).round())}°",
+                              style: const TextStyle(color: Colors.white)),
+                          // subtitle: Text(
+                          //     "${payload.forecastModel!.forecastData![index].weatherData![0].description}"),
+                        ))),
+              ),
+            ),
+          ),
         ],
       ),
     );
