@@ -57,6 +57,16 @@ class _HomeState extends State<Home> {
     _locationData = await location.getLocation();
   }
 
+//change bg according to image
+  String changeBackground({String? weather}) {
+    if (weather == "Clouds") {
+      return "assets/images/forest_cloudy.png";
+    } else if (weather == "Clear") {
+      return "assets/images/forest_sunny.png";
+    }
+    return "assets/images/forest_rainy.png";
+  }
+
   @override
   Widget build(BuildContext context) {
     logger.d(context.read<HomeCubit>().state.payload);
@@ -81,22 +91,31 @@ class _HomeState extends State<Home> {
                           height: sizer(context).height * 0.4,
                           color: AppColors.sunny,
                           child: Image.asset(
-                            "assets/images/forest_sunny.png",
+                            changeBackground(
+                                weather: payload
+                                    ?.currentWeatherModel?.weather[0].main),
                             fit: BoxFit.cover,
                           ),
                         ),
                         Positioned(
-                          top: 20,
-                          left: 30,
+                          width: sizer(context).width,
+                          // height: sizer(context).height * 0.4,
+                          top: 50,
+                          // left: 30,
                           child: Column(
                             children: [
                               Text(
                                   "${(((payload?.currentWeatherModel?.main.temp)! % 273.15).round())}°",
-                                  style: const TextStyle(color: Colors.white)),
-                              const Text(
-                                "SUNNY",
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 50,
+                                    fontWeight: FontWeight.bold,
+                                  )),
+                              Text(
+                                "${payload?.currentWeatherModel?.weather[0].main}",
                                 style: TextStyle(
-                                  fontSize: 30,
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
                                   color: Colors.white,
                                 ),
                               ),
