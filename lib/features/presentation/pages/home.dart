@@ -28,15 +28,15 @@ class _HomeState extends State<Home> {
   // get weather
   getWeather() async {
     await context.read<HomeCubit>().fetchCurrentWeather(
-        lat: _locationData!.latitude /* -1.286389*/,
-        long: _locationData!.longitude /*36.817223*/,
+        lat: _locationData!.latitude ?? -1.286389,
+        long: _locationData!.longitude ?? 36.817223,
         key: kWeatherKey);
   }
 
   getForecast() async {
     await context.read<ForecastCubit>().fetchForecastWeather(
-        lat: _locationData!.latitude /*-1.286389*/,
-        long: _locationData!.longitude /* 36.817223*/,
+        lat: _locationData!.latitude ?? -1.286389,
+        long: _locationData!.longitude ?? 36.817223,
         key: kWeatherKey);
   }
 
